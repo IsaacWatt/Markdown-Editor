@@ -3,8 +3,8 @@ var app = express();
 
 var sharejs = require('share');
 var redis = require("redis");
-
-var showdown = require('showdown'); 
+var showdown = require('showdown');
+var showdownHighlight = require('showdown-highlight')
 var bodyParser = require('body-parser');
 
 /* use ejs as the view engine */
@@ -25,7 +25,9 @@ app.get('/(:id)', function(request, response) {
 
 app.post('/service',(req, res)=>{
   var content = req.body.content;
-  converter = new showdown.Converter();
+  converter = new showdown.Converter({
+    extensions: [showdownHighlight]
+  });
   var finalCont = converter.makeHtml(content);
   res.send(finalCont);
 });
