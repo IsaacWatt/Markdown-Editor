@@ -6,6 +6,15 @@ html, body, section, .full-height {
   padding-left: 0;
   padding-right: 0; }
 
+.header-item {
+  float: right;
+  margin: 0;
+  padding: 10px;
+  padding-right: 20px; }
+  .header-item a:hover {
+    color: #337ab7;
+    opacity: .5; }
+
 body {
   margin: 0;
   padding: 0; }
