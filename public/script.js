@@ -1,5 +1,4 @@
 window.onload = function() {
-    var converter = new showdown.Converter();
     var pad = document.getElementById('pad');
     var markdownArea = document.getElementById('markdown');
 
@@ -8,8 +7,16 @@ window.onload = function() {
     var convertTextAreaToMarkdown = function(){
         var markdownText = pad.value;
         previousMarkdownValue = markdownText;
-        html = converter.makeHtml(markdownText);
-        markdownArea.innerHTML = html;
+        //html = converter.makeHtml(markdownText);
+        //markdownArea.innerHTML = html;
+
+        $.ajax({
+            type:"POST",
+            url:"/service",
+            data : { content : markdownText }
+        }).done((result)=>{
+            markdownArea.innerHTML = result;
+        });
     };
 
     var didChangeOccur = function(){
@@ -19,7 +26,7 @@ window.onload = function() {
         return false;
     };
 
-    setInterval(function(){
+    setInterval(function() {
         if(didChangeOccur()){
             convertTextAreaToMarkdown();
         }
