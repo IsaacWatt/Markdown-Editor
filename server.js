@@ -32,7 +32,6 @@ app.post('/service',(req, res)=>{
 });
 
 /* set up redis */
-// set up redis server
 var redisClient;
 if (process.env.REDISTOGO_URL) {
   var rtg = require("url").parse(process.env.REDISTOGO_URL);
@@ -44,8 +43,10 @@ if (process.env.REDISTOGO_URL) {
 
 /* configure shareJS */
 sharejs.server.attach(app, {
-  db: {type: 'redis'},
-  client: redisClient
+  db: {
+    type: 'redis',
+    client: redisClient
+  }
 });
 
 /* port 8000 or port used for heroku */
