@@ -33,13 +33,7 @@ app.post('/service',(req, res)=>{
 
 /* set up redis */
 var redisClient;
-if (process.env.REDISTOGO_URL) {
-  var rtg = require("url").parse(process.env.REDISTOGO_URL);
-  redisClient = require("redis").createClient(rtg.port, rtg.hostname);
-  redisClient.auth(rtg.auth.split(":")[1]);
-} else {
-  redisClient = require("redis").createClient();
-}
+redisClient = require('redis').createClient(process.env.REDIS_URL);
 
 /* configure shareJS */
 sharejs.server.attach(app, {
