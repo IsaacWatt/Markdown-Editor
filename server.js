@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 
 var sharejs = require('share');
-var redis = require("redis");
 var showdown = require('showdown');
 var showdownHighlight = require('showdown-highlight')
 var bodyParser = require('body-parser');
@@ -32,9 +31,21 @@ app.post('/service',(req, res)=>{
   res.send(finalCont);
 });
 
+/* set up redis */
+// set up redis server
+var redisClient;
+if (process.env.REDISTOGO_URL) {
+  var rtg = require("url").parse(process.env.REDISTOGO_URL);
+  redisClient = require("redis").createClient(rtg.port, rtg.hostname);
+  redisClient.auth(rtg.auth.split(":")[1]);
+} else {
+  redisClient = require("redis").createClient();
+}
+
 /* configure shareJS */
 sharejs.server.attach(app, {
-  db: {type: 'redis'}
+  db: {type: 'redis'},
+  client: redisClient
 });
 
 /* port 8000 or port used for heroku */
