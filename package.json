@@ -11,6 +11,8 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "html-pdf": "^2.2.0",
+    "markdown-pdf": "^9.0.0",
     "redis": "^2.8.0",
     "share": "^0.6.3",
     "showdown": "^1.8.6",

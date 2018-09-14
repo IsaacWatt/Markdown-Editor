@@ -1,6 +1,7 @@
+var pad = document.getElementById('pad');
+var markdownArea = document.getElementById('markdown');
+
 window.onload = function() {
-    var pad = document.getElementById('pad');
-    var markdownArea = document.getElementById('markdown');
 
     /* allow tabs */
     pad.addEventListener('keydown',function(e) {
@@ -60,3 +61,12 @@ window.onload = function() {
         convertTextAreaToMarkdown();
     });
 };
+
+$('.md-to-pdf').click( function () {
+  var markdownText = $("#markdown").html();
+  $.ajax({
+      type:"POST",
+      url:"/downloadmd",
+      data : { content : markdownText }
+  }).done((result)=>{});
+});

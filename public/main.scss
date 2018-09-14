@@ -26,9 +26,14 @@ body {
   margin: 0;
   padding: 0;
 }
+pre {
+  code {
+    background-color: transparent !important;
+  }
+}
 
-code {
-  background-color: transparent !important;
+.md-to-pdf:hover {
+  cursor: pointer;
 }
 
 #pad{
