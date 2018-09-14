@@ -64,9 +64,44 @@ window.onload = function() {
 
 $('.md-to-pdf').click( function () {
   var markdownText = $("#markdown").html();
+  loadingScreen.show();
+
   $.ajax({
       type:"POST",
       url:"/downloadmd",
       data : { content : markdownText }
-  }).done((result)=>{});
+  }).done((result)=>{
+    loadingScreen.hide();
+  });
 });
+
+var loadingScreen = (function($){
+
+    var screenContent = "<div class='notes-load-screen' style='opacity:0;'><i class='fa fa-spin fa-cog'></i></div>";
+
+    function show () {
+        $('body').append(screenContent);
+        $('.notes-load-screen').animate({
+            'opacity':1
+        }, 300);
+    }
+
+    function hide () {
+        $('.notes-load-screen').animate({
+            'opacity': 0
+        }, 300, function(){
+            $(this).remove();
+        });
+    }
+
+    function isShown () {
+        return ( $('.notes-load-screen').length );
+    }
+
+    return {
+        show:show,
+        hide:hide,
+        isShown:isShown
+    };
+
+}(jQuery));
