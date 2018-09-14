@@ -2,8 +2,8 @@ var express = require('express');
 var app = express();
 
 var sharejs = require('share');
-var showdown = require('showdown');
-var showdownHighlight = require('showdown-highlight')
+const showdown = require('showdown');
+const showdownHighlight = require('showdown-highlight')
 var bodyParser = require('body-parser');
 var markdownpdf = require('markdown-pdf');
 var fs = require('fs');
@@ -27,10 +27,13 @@ app.get('/(:id)', function(request, response) {
 
 app.post('/service',(request, response)=>{
   var content = request.body.content;
-  converter = new showdown.Converter({
+  var converter = new showdown.Converter({
     extensions: [showdownHighlight]
   });
+
   var finalCont = converter.makeHtml(content);
+  console.log(content);
+  finalCont = finalCont.replace('hljs', '');
   response.send(finalCont);
 });
 
