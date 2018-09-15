@@ -45,12 +45,10 @@ app.post('/service',(request, response)=>{
   }
 
   var newString = finalCont.replace(/tx.*tx/g,replacer);
-  //console.log(finalCont);
-
   response.send(newString);
 });
 
-app.post('/downloadmd',(request, response)=>{
+app.post('/downloadmd',(request, response) => {
   var content = request.body.content;
   content += '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-seaside-light.min.css" />'
   content += '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">';
@@ -91,9 +89,9 @@ app.post('/downloadmd',(request, response)=>{
   var s = today.getSeconds();
 
   pdf.create(content, options).toFile('../../../Markdown-Notes' + dd + '-' + mm + '-' + s + '-' + 'notes-md.pdf', function(err, res) {
-    console.log(res);
-    response.send('sucess');
+    response.send(res);
   });
+
 });
 
 /* set up redis */

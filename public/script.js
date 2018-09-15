@@ -71,6 +71,7 @@ $('.md-to-pdf').click( function () {
       url:"/downloadmd",
       data : { content : markdownText }
   }).done((result)=>{
+    console.log(result);
     loadingScreen.hide();
   });
 });
