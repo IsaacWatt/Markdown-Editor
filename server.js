@@ -87,9 +87,18 @@ app.post('/downloadmd',(request, response) => {
   var dd = today.getDate();
   var mm = today.getMonth()+1;
   var s = today.getSeconds();
+  var pdfFilePath = './businesscard.pdf';
+  var options = { format: 'Letter' };
 
+  /*
   pdf.create(content, options).toFile('../../../Markdown-Notes' + dd + '-' + mm + '-' + s + '-' + 'notes-md.pdf', function(err, res) {
     response.send(res);
+  });
+  */
+
+  pdf.create(content, options).toStream(function(err, stream) {
+   response.setHeader('Content-Type', 'application/pdf')
+   stream.pipe(response);
   });
 
 });

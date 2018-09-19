@@ -72,6 +72,7 @@ $('.md-to-pdf').click( function () {
       data : { content : markdownText }
   }).done((result)=>{
     console.log(result);
+    window.open();
     loadingScreen.hide();
   });
 });
