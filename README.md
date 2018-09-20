@@ -21,7 +21,7 @@ A web app for taking note taking! Created as a tool for taking notes in my CS co
 ## Features
 - Supports markdown syntax along with syntax highlighting
 - Real-time note taking using `redis` and `share`
-- Download Notes to a PDF
+- Latex support: simply write latex between tx tags as such: `tx hello tx`
 
 
 ## To be Implemented
